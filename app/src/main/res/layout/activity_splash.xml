@@ -9,7 +9,8 @@
     <ImageView
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:background="@drawable/Logo"
-
+        android:background="@drawable/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         />
 </RelativeLayout>
