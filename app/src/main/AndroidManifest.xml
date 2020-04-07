@@ -12,7 +12,7 @@
         android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CategoryActivity" android:screenOrientation="fullSensor">
+        <activity android:name=".SplashActivity" android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" android:screenOrientation="fullSensor"></activity>
+        <activity android:name=".CategoryActivity"></activity>
     </application>
 
 </manifest>
