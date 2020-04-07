@@ -20,7 +20,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" android:screenOrientation="fullSensor" android:theme="@style/AppThemeHide"></activity>
-        <activity android:name=".CategoryActivity" android:theme="@style/AppThemeHide"></activity>
     </application>
 
 </manifest>
