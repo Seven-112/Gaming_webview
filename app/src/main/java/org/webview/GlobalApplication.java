@@ -2,6 +2,7 @@ package org.webview;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,8 @@ import com.adjust.sdk.AdjustAttribution;
 import com.adjust.sdk.AdjustConfig;
 import com.adjust.sdk.AdjustEventFailure;
 import com.adjust.sdk.AdjustEventSuccess;
+import com.adjust.sdk.AdjustSessionFailure;
+import com.adjust.sdk.AdjustSessionSuccess;
 import com.adjust.sdk.LogLevel;
 import com.adjust.sdk.OnAttributionChangedListener;
 import com.adjust.sdk.OnDeeplinkResponseListener;
@@ -18,12 +21,7 @@ import com.adjust.sdk.OnEventTrackingFailedListener;
 import com.adjust.sdk.OnEventTrackingSucceededListener;
 import com.adjust.sdk.OnSessionTrackingFailedListener;
 import com.adjust.sdk.OnSessionTrackingSucceededListener;
-import com.adjust.sdk.AdjustSessionFailure;
-import com.adjust.sdk.AdjustSessionSuccess;
 
-/**
- * Created by pfms on 17/12/14.
- */
 public class GlobalApplication extends Application {
     @Override
     public void onCreate() {
@@ -46,13 +44,20 @@ public class GlobalApplication extends Application {
                 Log.d("example", "Attribution: " + attribution.toString());
             }
         });
-
+        /**
+         * Here adjust init value getting & to global variables
+         * */
         // Set event success tracking delegate.
         config.setOnEventTrackingSucceededListener(new OnEventTrackingSucceededListener() {
             @Override
             public void onFinishedEventTrackingSucceeded(AdjustEventSuccess eventSuccessResponseData) {
                 Log.d("example", "Event success callback called!");
                 Log.d("example", "Event success data: " + eventSuccessResponseData.toString());
+
+                SharedPreferences.Editor editor = getSharedPreferences("info", MODE_PRIVATE).edit();
+                editor.putString("ga_id", eventSuccessResponseData.adid);
+                editor.putString("adjust_id", eventSuccessResponseData.eventToken);
+                editor.apply();
             }
         });
 
@@ -71,6 +76,7 @@ public class GlobalApplication extends Application {
             public void onFinishedSessionTrackingSucceeded(AdjustSessionSuccess sessionSuccessResponseData) {
                 Log.d("example", "Session success callback called!");
                 Log.d("example", "Session success data: " + sessionSuccessResponseData.toString());
+
             }
         });
 
