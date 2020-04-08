@@ -56,12 +56,6 @@ public class MainActivity extends AppCompatActivity {
         String[] language = Locale.getDefault().toString().split("_");
         locale_id = language[0];
 
-        Log.i("packageName ================>", package_name);
-        Log.i("locale_id ==============>", locale_id);
-        Log.i("device_id ===========>", device_id);
-        Log.i("ga_id =============>", ga_id);
-        Log.i("adjust_id ============>", adjust_id);
-
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient());
