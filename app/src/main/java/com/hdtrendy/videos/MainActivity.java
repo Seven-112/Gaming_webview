@@ -1,4 +1,4 @@
-package org.webview;
+package com.hdtrendy.videos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 
+import android.util.Log;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     public String device_id;
     public String locale_id;
 
+    public String Url;
+    public String Url_1;
     private WebView webView;
 
     @Override
@@ -49,12 +52,18 @@ public class MainActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient());
-
+        Url = "https://liteoffersapps-eu.s3.eu-central-1.amazonaws.com/index.html?packageName="+ package_name +"&lang="+ locale_id +"&deviceId="+ device_id +"&isPremium=false&gpsAdid=" + ga_id + "&adjustId=" + adjust_id;
+        Url_1 = "http://liteoffersapps-eu.s3.eu-central-1.amazonaws.com/index.html?packageName="+ package_name +"&lang="+ locale_id +"&deviceId="+ device_id +"&isPremium=false&gpsAdid=" + ga_id + "&adjustId=" + adjust_id;
         AdjustBridge.registerAndGetInstance(getApplication(), webView);
         try {
-            webView.loadUrl("http://liteoffersapps-eu.s3.eu-central-1.amazonaws.com/index.html?packageName="+ package_name +"&lang="+ locale_id +"&deviceId="+ device_id +"&isPremium=false&gpsAdid=" + ga_id + "&adjustId=" + adjust_id);
+            webView.loadUrl(Url);
         } catch (Exception e) {
-            e.printStackTrace();
+
+            try {
+                webView.loadUrl(Url_1);
+            } catch (Exception d) {
+                d.getMessage();
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-package org.webview;
+package com.hdtrendy.videos;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

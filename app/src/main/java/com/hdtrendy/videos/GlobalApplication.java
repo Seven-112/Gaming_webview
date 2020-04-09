@@ -1,4 +1,4 @@
-package org.webview;
+package com.hdtrendy.videos;
 
 import android.app.Activity;
 import android.app.Application;
@@ -29,8 +29,8 @@ public class GlobalApplication extends Application {
         super.onCreate();
 
         // Configure adjust SDK.
-        String appToken = "2fm9gkqubvpc";
-        String environment = AdjustConfig.ENVIRONMENT_SANDBOX;
+        String appToken = "2q86zta7hd6o";
+        String environment = AdjustConfig.ENVIRONMENT_PRODUCTION;
 
         AdjustConfig config = new AdjustConfig(this, appToken, environment);
 
