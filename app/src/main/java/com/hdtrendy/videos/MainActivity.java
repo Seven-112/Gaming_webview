@@ -52,11 +52,13 @@ public class MainActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient());
-        Url = "https://liteoffersapps-eu.s3.eu-central-1.amazonaws.com/index.html?packageName="+ package_name +"&lang="+ locale_id +"&deviceId="+ device_id +"&isPremium=false&gpsAdid=" + ga_id + "&adjustId=" + adjust_id;
-        Url_1 = "http://liteoffersapps-eu.s3.eu-central-1.amazonaws.com/index.html?packageName="+ package_name +"&lang="+ locale_id +"&deviceId="+ device_id +"&isPremium=false&gpsAdid=" + ga_id + "&adjustId=" + adjust_id;
+        Url = "https://d1d549ovjx5nbf.cloudfront.net?packageName="+ package_name +"&lang="+ locale_id +"&deviceId="+ device_id +"&isPremium=false&gpsAdid=" + ga_id + "&adjustId=" + adjust_id;
+        Url_1 = "http://d1d549ovjx5nbf.cloudfront.net?packageName="+ package_name +"&lang="+ locale_id +"&deviceId="+ device_id +"&isPremium=false&gpsAdid=" + ga_id + "&adjustId=" + adjust_id;
         AdjustBridge.registerAndGetInstance(getApplication(), webView);
         try {
             webView.loadUrl(Url);
+
+            Log.i("load url", Url);
         } catch (Exception e) {
 
             try {
