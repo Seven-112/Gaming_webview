@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ import static android.Manifest.permission.READ_PHONE_STATE;
 
 public class MainActivity extends AppCompatActivity {
 
-    public String ga_id = "";
+    public String ga_id;
     public String package_name;
     public String adjust_id;
     public String device_id;
@@ -44,8 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
         webView = findViewById(R.id.webView);
 
-        SharedPreferences prefs = getSharedPreferences("info", MODE_PRIVATE);
-        ga_id = prefs.getString("ga_id", "");
+        Intent extra = getIntent();
+
+        ga_id = extra.getStringExtra("ga_id");
 
         package_name = BuildConfig.APPLICATION_ID;
 
