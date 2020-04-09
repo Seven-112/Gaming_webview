@@ -54,17 +54,6 @@ public class GlobalApplication extends Application {
             public void onFinishedEventTrackingSucceeded(AdjustEventSuccess eventSuccessResponseData) {
                 Log.d("example", "Event success callback called!");
                 Log.d("example", "Event success data: " + eventSuccessResponseData.toString());
-                Adjust.getGoogleAdId(GlobalApplication.this, new OnDeviceIdsRead() {
-                    @Override
-                    public void onGoogleAdIdRead(String googleAdId) {
-                        SharedPreferences.Editor editor = getSharedPreferences("info", MODE_PRIVATE).edit();
-                        editor.putString("ga_id", googleAdId);
-                        editor.apply();
-                    }
-                });
-                SharedPreferences.Editor editor = getSharedPreferences("info", MODE_PRIVATE).edit();
-                editor.putString("adjust_id", eventSuccessResponseData.eventToken);
-                editor.apply();
             }
         });
 

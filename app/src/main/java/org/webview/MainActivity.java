@@ -1,32 +1,21 @@
 package org.webview;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
+
 import android.os.Bundle;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
-import android.util.Log;
+
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 import com.adjust.sdk.Adjust;
-import com.adjust.sdk.AdjustEvent;
-import com.adjust.sdk.OnDeviceIdsRead;
+
 import com.adjust.sdk.webbridge.AdjustBridge;
 
 import java.util.Locale;
-import java.util.UUID;
-
-import static android.Manifest.permission.READ_PHONE_STATE;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,9 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         webView = findViewById(R.id.webView);
 
-        Intent extra = getIntent();
-
-        ga_id = extra.getStringExtra("ga_id");
+        SharedPreferences prefs = getSharedPreferences("info", MODE_PRIVATE);
+        ga_id = prefs.getString("ga_id", "");
 
         package_name = BuildConfig.APPLICATION_ID;
 

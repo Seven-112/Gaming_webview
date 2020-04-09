@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 
 import com.adjust.sdk.Adjust;
 import com.adjust.sdk.AdjustEvent;
+import com.adjust.sdk.OnDeviceIdsRead;
 
 import java.util.Locale;
 
@@ -23,25 +24,22 @@ import static android.Manifest.permission.READ_PHONE_STATE;
 
 public class SplashActivity extends AppCompatActivity {
 
-    public String ga_id;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        SharedPreferences prefs = getSharedPreferences("info", MODE_PRIVATE);
-        ga_id = prefs.getString("ga_id", "");
-
-        Handler handler = new Handler();new Handler().postDelayed(new Runnable(){
+        Adjust.getGoogleAdId(SplashActivity.this, new OnDeviceIdsRead() {
             @Override
-            public void run() {
-                /* Create an Intent that will start the Menu-Activity. */
-                Intent intent = new Intent(SplashActivity.this,MainActivity.class);
-                intent.putExtra("ga_id", ga_id);
+            public void onGoogleAdIdRead(String googleAdId) {
+                SharedPreferences.Editor editor = getSharedPreferences("info", MODE_PRIVATE).edit();
+                editor.putString("ga_id", googleAdId);
+                editor.apply();
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
-        }, 2500);
+        });
 
     }
 
