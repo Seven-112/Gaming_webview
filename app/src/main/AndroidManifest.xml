@@ -21,13 +21,14 @@
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
-        <activity android:name=".SplashActivity" android:screenOrientation="fullSensor" android:theme="@style/AppThemeHide">
+        <activity android:name=".InitActivity" android:screenOrientation="fullSensor" android:theme="@style/AppThemeHide">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SplashActivity" android:screenOrientation="fullSensor" android:theme="@style/AppThemeHide"></activity>
         <activity android:name=".MainActivity" android:screenOrientation="fullSensor" android:theme="@style/AppThemeHide"></activity>
 
     </application>
