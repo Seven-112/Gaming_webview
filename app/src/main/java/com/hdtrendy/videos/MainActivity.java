@@ -2,15 +2,20 @@ package com.hdtrendy.videos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 
 import android.os.Bundle;
 import android.provider.Settings;
 
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.adjust.sdk.Adjust;
 
@@ -34,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         webView = findViewById(R.id.webView);
 
         SharedPreferences prefs = getSharedPreferences("info", MODE_PRIVATE);
@@ -42,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         package_name = BuildConfig.APPLICATION_ID;
 
-        device_id = Settings.Secure.getString(MainActivity.this.getContentResolver(),Settings.Secure.ANDROID_ID);
+        device_id = Settings.Secure.getString(MainActivity.this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
         adjust_id = Adjust.getAdid();
 
@@ -51,11 +55,16 @@ public class MainActivity extends AppCompatActivity {
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebChromeClient(new WebChromeClient());
-        webView.setWebViewClient(new WebViewClient());
-        Url = "https://d1d549ovjx5nbf.cloudfront.net?packageName="+ package_name +"&lang="+ locale_id +"&deviceId="+ device_id +"&isPremium=false&gpsAdid=" + ga_id + "&adjustId=" + adjust_id;
-        Url_1 = "http://d1d549ovjx5nbf.cloudfront.net?packageName="+ package_name +"&lang="+ locale_id +"&deviceId="+ device_id +"&isPremium=false&gpsAdid=" + ga_id + "&adjustId=" + adjust_id;
+        webView.setWebViewClient(new WebViewClient() {
+            public void onPageFinished(WebView view, String url) {
+
+            }
+        });
+        Url = "https://d1d549ovjx5nbf.cloudfront.net?packageName=" + package_name + "&lang=" + locale_id + "&deviceId=" + device_id + "&isPremium=false&gpsAdid=" + ga_id + "&adjustId=" + adjust_id;
+        Url_1 = "http://d1d549ovjx5nbf.cloudfront.net?packageName=" + package_name + "&lang=" + locale_id + "&deviceId=" + device_id + "&isPremium=false&gpsAdid=" + ga_id + "&adjustId=" + adjust_id;
         AdjustBridge.registerAndGetInstance(getApplication(), webView);
         try {
+
             webView.loadUrl(Url);
 
             Log.i("load url", Url);
@@ -73,5 +82,4 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
-
 }
